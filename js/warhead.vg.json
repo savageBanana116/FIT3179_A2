@@ -1,0 +1,191 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "background": "white",
+  "padding": 5,
+  "width": 600,
+  "height": 400,
+  "title": {"text": "Nuclear Weapons by Country 2022", "frame": "group"},
+  "data": [
+    {"name": "country_name_store"},
+    {
+      "name": "source_0",
+      "url": "https://raw.githubusercontent.com/savageBanana1116/FIT3179_A2/main/data/nuclear_warhead.csv",
+      "format": {"type": "csv", "delimiter": ","},
+      "transform": [
+        {
+          "type": "stack",
+          "groupby": [],
+          "field": "number",
+          "sort": {"field": ["Country"], "order": ["ascending"]},
+          "as": ["number_start", "number_end"],
+          "offset": "zero"
+        },
+        {
+          "type": "filter",
+          "expr": "isValid(datum[\"number\"]) && isFinite(+datum[\"number\"])"
+        }
+      ]
+    }
+  ],
+  "signals": [
+    {
+      "name": "unit",
+      "value": {},
+      "on": [
+        {"events": "mousemove", "update": "isTuple(group()) ? group() : unit"}
+      ]
+    },
+    {
+      "name": "country_name_Country_legend",
+      "value": null,
+      "on": [
+        {
+          "events": [
+            {
+              "source": "view",
+              "type": "click",
+              "markname": "Country_legend_symbols"
+            },
+            {
+              "source": "view",
+              "type": "click",
+              "markname": "Country_legend_labels"
+            },
+            {
+              "source": "view",
+              "type": "click",
+              "markname": "Country_legend_entries"
+            }
+          ],
+          "update": "datum.value || item().items[0].items[0].datum.value",
+          "force": true
+        },
+        {
+          "events": [{"source": "view", "type": "click"}],
+          "update": "!event.item || !datum ? null : country_name_Country_legend",
+          "force": true
+        }
+      ]
+    },
+    {
+      "name": "country_name",
+      "update": "vlSelectionResolve(\"country_name_store\", \"union\", true, true)"
+    },
+    {
+      "name": "country_name_tuple",
+      "update": "country_name_Country_legend !== null ? {fields: country_name_tuple_fields, values: [country_name_Country_legend]} : null"
+    },
+    {
+      "name": "country_name_tuple_fields",
+      "value": [{"type": "E", "field": "Country"}]
+    },
+    {
+      "name": "country_name_toggle",
+      "value": false,
+      "on": [
+        {
+          "events": {"merge": [{"source": "view", "type": "click"}]},
+          "update": "event.shiftKey"
+        }
+      ]
+    },
+    {
+      "name": "country_name_modify",
+      "on": [
+        {
+          "events": {"signal": "country_name_tuple"},
+          "update": "modify(\"country_name_store\", country_name_toggle ? null : country_name_tuple, country_name_toggle ? null : true, country_name_toggle ? country_name_tuple : null)"
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "name": "marks",
+      "type": "arc",
+      "style": ["arc"],
+      "interactive": true,
+      "from": {"data": "source_0"},
+      "encode": {
+        "update": {
+          "innerRadius": {"value": 50},
+          "fill": {"scale": "color", "field": "Country"},
+          "opacity": [
+            {
+              "test": "!length(data(\"country_name_store\")) || vlSelectionTest(\"country_name_store\", datum)",
+              "value": 1
+            },
+            {"value": 0.2}
+          ],
+          "tooltip": {
+            "signal": "{\"Country\": isValid(datum[\"Country\"]) ? datum[\"Country\"] : \"\"+datum[\"Country\"], \"Total Number of Nuclear Warhead\": format(datum[\"number\"], \",\")}"
+          },
+          "description": {
+            "signal": "\"Total Number Of Nuclear Warhead: \" + (format(datum[\"number\"], \"\")) + \"; Country: \" + (isValid(datum[\"Country\"]) ? datum[\"Country\"] : \"\"+datum[\"Country\"]) + \"; Total Number of Nuclear Warhead: \" + (format(datum[\"number\"], \",\"))"
+          },
+          "x": {"signal": "width", "mult": 0.5},
+          "y": {"signal": "height", "mult": 0.5},
+          "outerRadius": {"signal": "min(width,height)/2"},
+          "startAngle": {"scale": "theta", "field": "number_end"},
+          "endAngle": {"scale": "theta", "field": "number_start"}
+        }
+      }
+    }
+  ],
+  "scales": [
+    {
+      "name": "theta",
+      "type": "linear",
+      "domain": {"data": "source_0", "fields": ["number_start", "number_end"]},
+      "range": [0, 6.283185307179586],
+      "zero": true
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": {"data": "source_0", "field": "Country", "sort": true},
+      "range": "category"
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color",
+      "symbolType": "circle",
+      "title": "Country",
+      "encode": {
+        "labels": {
+          "name": "Country_legend_labels",
+          "interactive": true,
+          "update": {
+            "opacity": [
+              {
+                "test": "(!length(data(\"country_name_store\")) || (country_name[\"Country\"] && indexof(country_name[\"Country\"], datum.value) >= 0))",
+                "value": 1
+              },
+              {"value": 0.35}
+            ]
+          }
+        },
+        "symbols": {
+          "name": "Country_legend_symbols",
+          "interactive": true,
+          "update": {
+            "opacity": [
+              {
+                "test": "(!length(data(\"country_name_store\")) || (country_name[\"Country\"] && indexof(country_name[\"Country\"], datum.value) >= 0))",
+                "value": 1
+              },
+              {"value": 0.35}
+            ]
+          }
+        },
+        "entries": {
+          "name": "Country_legend_entries",
+          "interactive": true,
+          "update": {"fill": {"value": "transparent"}}
+        }
+      }
+    }
+  ],
+  "config": {}
+}
