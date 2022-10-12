@@ -1,0 +1,19 @@
+#scatter_plot {
+	top:100px;
+	bottom: 100px; 
+	left: 100px;
+	right: 100px;
+	/*height: 1000px;
+	width: 800px;*/
+}
+#vg-tooltip-element table{
+    width: 20vh;
+}
+
+.vg-tooltip visible light-theme{
+    width: 540px;
+}
+
+.low{
+    margin-top: 10%;
+}
