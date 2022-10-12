@@ -1,0 +1,32 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500,
+  "height": 500,
+  "description": "A simple donut chart with embedded data.",
+  "data": {
+    "url": "https://raw.githubusercontent.com/savageBanana1116/FIT3179_A2/main/data/nuclear_warhead.csv"
+  },
+  "mark": {"type": "arc", "innerRadius": 80},
+  "encoding": {
+    "theta": {"field": "number", "type": "quantitative"},
+    "color": {"field": "Country", "type": "nominal"},
+    "opacity": {"condition": {"param": "Country", "value": 1}, "value": 0.2},
+    "tooltip": [
+      {"field": "Country", "type": "nominal"},
+      {
+        "field": "number",
+        "type": "quantitative",
+        "title": "Total Number of Nuclear Warhead",
+        "format": ","
+      }
+    ]
+  },
+  "params": [
+    {
+      "name": "Country",
+      "select": {"type": "point", "fields": ["Country"]},
+      "bind": "legend"
+    }
+  ],
+  "config": {}
+}
