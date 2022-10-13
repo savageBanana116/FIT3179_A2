@@ -3,8 +3,8 @@
   "data": {
     "url": "https://raw.githubusercontent.com/savageBanana1116/FIT3179_A2/main/data/nuclear_warhead%20-%20Sheet1.csv"
   },
-  "width": 600,
-  "height": 600,
+  "width": 400,
+  "height": 300,
   "encoding": {"x": {"field": "year", "type": "temporal"}},
   "layer": [
     {
