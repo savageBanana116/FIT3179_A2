@@ -33,8 +33,12 @@
 <div id="map-base">
 </div>
 
-<h1 class="low">5.military spending</h1>
+<h1 class="low">6.military spending</h1>
 <div id="spending">
+</div>
+
+<h1 class="low">7.manPower</h1>
+<div id="manPower">
 </div>
 <script type="text/javascript">
 
@@ -62,6 +66,10 @@
 
     var spec6 = "js/spending.vl.json";
     vegaEmbed('#spending', spec6).then(function(result) {
+    }).catch(console.error);
+
+    var spec7 = "js/manPower.vl.json";
+    vegaEmbed('#manPower', spec7).then(function(result) {
     }).catch(console.error);
   </script>
   
