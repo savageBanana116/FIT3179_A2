@@ -1,11 +1,12 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 250,
-  "height": 250,
-  "padding":15,
+  
   "data": {
     "url": "https://raw.githubusercontent.com/savageBanana1116/FIT3179_A2/main/data/manPower-active.csv"
   },
+    "width": 250,
+  "height": 250,
+  "padding":15,
   "mark": "bar",
   "encoding": {
     "x": {
