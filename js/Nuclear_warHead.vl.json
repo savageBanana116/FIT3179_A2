@@ -1,0 +1,66 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/savageBanana1116/FIT3179_A2/main/data/nuclear_warhead%20-%20Sheet1.csv"
+  },
+  "width": 600,
+  "height": 600,
+  "encoding": {"x": {"field": "year", "type": "temporal"}},
+  "layer": [
+    {
+      "encoding": {
+        "color": {"field": "Country", "type": "nominal"},
+        "y": {
+          "field": "number",
+          "type": "quantitative",
+          "scale": {"domain": [0, 41000]}
+        }
+      },
+      "layer": [
+        {"mark": "line"},
+        {
+          "transform": [{"filter": {"param": "hover", "empty": false}}],
+          "mark": "point"
+        }
+      ]
+    },
+    {
+      "transform": [
+        {"pivot": "Country", "value": "number", "groupby": ["year"]}
+      ],
+      "mark": "rule",
+      "encoding": {
+        "opacity": {
+          "condition": {"value": 0.3, "param": "hover", "empty": false},
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "United States", "type": "quantitative"},
+          {"field": "USSR/Russia", "type": "quantitative"},
+          {"field": "China", "type": "quantitative"},
+          {"field": "France", "type": "quantitative"},
+          {"field": "India", "type": "quantitative"},
+          {"field": "Israel", "type": "quantitative"},
+          {"field": "North Korea", "type": "quantitative"},
+          {"field": "Pakistan", "type": "quantitative"},
+          {"field": "South Africa", "type": "quantitative"},
+          {"field": "United Kingdom", "type": "quantitative"},
+          {"field": "year", "type": "temporal"}
+        ]
+      },
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": ["year"],
+            "nearest": true,
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ]
+    }
+  ],
+  "config": {}
+}
