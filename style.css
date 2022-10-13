@@ -7,7 +7,7 @@
 	width: 800px;*/
 }
 #vg-tooltip-element table{
-    width: 20vh;
+    width: 300px;
 }
 
 .vg-tooltip visible light-theme{
@@ -17,3 +17,4 @@
 .low{
     margin-top: 10%;
 }
+
