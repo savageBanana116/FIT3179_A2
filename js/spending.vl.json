@@ -3,7 +3,7 @@
     "background": "white",
     "padding": 5,
     "width": 800,
-    "height": 600,
+    "height": 500,
     "title": {"text": "Military spending by country 2022", "frame": "group"},
     "style": "cell",
     "data": [
