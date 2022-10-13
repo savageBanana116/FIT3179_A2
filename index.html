@@ -8,32 +8,60 @@
   
   
   <!-- CSS file -->
-  <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
+  <link rel="stylesheet" type="text/css" href="style.css" media="all">
   
 </head>
 <body>
   
-    <h1>Viz 1: Military Spending by Country </h1>
+    <h1> 1.warhead number</h1>
 <div id="scatter_plot">
 </div>
 
-<h1 class="low">Viz 2: Country with US military base </h1>
-<div id="map">
+<h1 class="low">2.number of tank </h1>
+<div id="map-tank">
 </div>
 
+<h1 class="low">3.number of aircraft</h1>
+<div id="map-aircraft">
+</div>
+
+<h1 class="low">4.number of aircraft carrier</h1>
+<div id="map-carrier">
+</div>
+
+<h1 class="low">5.Country with us military base</h1>
+<div id="map-base">
+</div>
+
+<h1 class="low">5.military spending</h1>
+<div id="spending">
+</div>
 <script type="text/javascript">
 
-  var spec2 = "js/Nuclear_warHead.vl.json";
-  vegaEmbed('#scatter_plot', spec2).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  var spec1 = "js/Nuclear_warHead.vl.json";
+  vegaEmbed('#scatter_plot', spec1).then(function(result) {
   }).catch(console.error);
-</script>
 
-<script type="text/javascript">
 
     var spec2 = "js/tank.vl.json";
-    vegaEmbed('#map', spec2).then(function(result) {
-      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    vegaEmbed('#map-tank', spec2).then(function(result) {
+    }).catch(console.error);
+
+    var spec3 = "js/aircraft.vl.json";
+    vegaEmbed('#map-aircraft', spec3).then(function(result) {
+    }).catch(console.error);
+
+
+    var spec4 = "js/carrier.vl.json";
+    vegaEmbed('#map-carrier', spec4).then(function(result) {
+    }).catch(console.error);
+
+    var spec5 = "js/base.vl.json";
+    vegaEmbed('#map-base', spec5).then(function(result) {
+    }).catch(console.error);
+
+    var spec6 = "js/spending.vl.json";
+    vegaEmbed('#spending', spec6).then(function(result) {
     }).catch(console.error);
   </script>
   
