@@ -1,0 +1,29 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+   "width": 250,
+  "height": 250,
+  "padding":15,
+  "data": {
+    "url": "https://raw.githubusercontent.com/savageBanana1116/FIT3179_A2/main/data/manPower-active.csv"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "aggregate": "sum",
+      "field": "activeDuty",
+      "title": "Active Personnel"
+    },
+    "y": {"field": "country", "sort": "-x", "title": "Country"},
+    "color": {"field": "country", "title": "Country"},
+    "tooltip": [
+      {"field": "country", "type": "nominal"},
+      {
+        "field": "activeDuty",
+        "title": "Number of active personnel",
+        "type": "quantitative",
+        "format": ","
+      }
+    ]
+  },
+  "config": {}
+}
