@@ -68,7 +68,7 @@
               "field": "number",
               "type": "quantitative",
               "scale": {"domain": [0, 13000], "scheme": "oranges"},
-              "legend": {"title": "Number of tank"}
+              "legend": {"title": "Number of Aircraft"}
             },
             "tooltip": [
               {
