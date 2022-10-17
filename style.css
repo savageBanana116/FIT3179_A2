@@ -1,3 +1,28 @@
+@media only screen and (max-width: 1400px) {
+	#map-base canvas{
+		width: 800px !important;
+	}
+
+	#manPower canvas{
+		width: 330px !important;
+	}
+	
+	#map-tank canvas{
+		width: 850px !important;
+	}
+
+	#map-carrier canvas{
+		width: 850px !important;
+	}
+
+	#map-aircraft canvas{
+		width: 850px !important;
+	}
+
+	#spending canvas{
+		width: 850px !important;
+	}
+  }
 
 #vg-tooltip-element table{
     width: 350px;
